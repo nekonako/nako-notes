@@ -1,2 +1,2 @@
 ### Nako Notes
-![]('./shoot.png')
+![](shoot.png)
