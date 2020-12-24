@@ -52,14 +52,14 @@ const App = () => {
   return (
     <>
       <div className='min-h-screen p-4 text-base md:p-32 bg-primary md:text-lg'>
-        <div className='p-12 bg-secondary' style={{border: 'solid 2px'}}>
+        <div className='p-4 md:p-12 bg-secondary' style={{border: 'solid 2px'}}>
           <div className='pb-8 text-4xl font-bold text-center serif'>Nako Notes</div>
           <form onSubmit={addNote}>
             <textarea type='text' name='note'  className='w-full p-3' resize='none'
               style={{resize:'none', border: 'solid 2px #F3D2C1'}} />
             <br/>
-            <button className='p-4 py-2 mt-4 text-xl text-white bg-accent '
-              style={{border: 'solid 2px'}}>Submit</button>
+            <button className='px-4 py-1 mt-4 text-xl text-white bg-accent '
+              style={{border: 'solid 2px'}}>Simpan</button>
             <br/>
           </form>
           <div className='my-12'>
@@ -67,20 +67,20 @@ const App = () => {
               return(
                 <>
                   <div id={note.id}>
-                    <div className='flex flex-row justify-between mt-2'>
+                    <div className='flex flex-col mt-2'>
                       {note.id !== noteEditing ? (
-                        <div className='w-4/5' style={{borderBottom:'solid 2px #F3D2C1'}}>{note.text}</div>
+                        <div className='w-full pb-2' style={{borderBottom:'solid 2px #F3D2C1'}}>{note.text}</div>
                       ) : (
                         <form onSubmit={(e)=> editNote(e, note.id)}>
                           <textarea type='text' name='note' defaultValue={note.text}  className='w-full p-3' resize='none'
                             style={{resize:'none', border: 'solid 2px #F3D2C1'}} />
-                          <button type='submit' className='p-4 py-2 mt-4 text-xl text-white bg-accent ' value='simpan' width='300'
-                            style={{border: 'solid 2px'}}>Edit</button>
+                          <button type='submit' className='px-3 mt-4 mb-4 text-xl text-white bg-accent ' value='simpan' width='300'
+                            style={{border: 'solid 2px'}}>Simpan</button>
                         </form>
                       )}
-                      <div className='w-auto'>
-                        <button onClick={()=> setNoteEditing(note.id)} style={{border: 'solid 2px'}} className='p-1 px-3 mx-1 bg-accent'>Edit</button>
-                        <button onClick={()=> deleteNotes(note.id)} style={{border: 'solid 2px'}} className='p-1 px-3 mx-1 bg-highlight'>Delete</button>
+                      <div className='mt-3'>
+                        <button onClick={()=> setNoteEditing(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-accent'>Edit</button>
+                        <button onClick={()=> deleteNotes(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-highlight'>Delete</button>
                       </div>
                     </div>
                   </div>
