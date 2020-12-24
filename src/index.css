@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+.bg-primary {
+  background-color: theme('colors.color-primary');
+}
+
+.bg-secondary {
+  background-color: theme('colors.color-secondary');
+}
+.bg-accent {
+  background-color: theme('colors.color-accent');
+}
+.bg-highlight {
+  background-color: theme('colors.color-highlight');
+}
+body {
+  color: theme('colors.color-dark');
+  font-family: 'Patrick Hand', cursive;
+}
