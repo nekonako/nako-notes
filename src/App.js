@@ -83,7 +83,7 @@ const App = () => {
                   <div id={note.id}>
                     <div className='flex flex-col mt-2'>
                       {note.id !== noteEditing ? (
-                        <div className='w-full pb-2' style={{borderBottom:'solid 2px #F3D2C1'}}>{note.text}</div>
+                        <div className='relative pb-2 break-words' style={{borderBottom:'solid 1px #F3D2C1'}}>{note.text}<br/></div>
                       ) : (
                         <form onSubmit={(e)=> editNote(e, note.id)}>
                           <textarea type='text' name='note' defaultValue={note.text}  className='w-full p-3' resize='none'
@@ -93,10 +93,10 @@ const App = () => {
                         </form>
                       )}
                       <div className='flex justify-between mt-3'>
-                        <div>
-                          <span className='text-sm opacity-60'>{note.date}</span>
+                        <div className='-my-2'>
+                          <span className='-mt-2 text-sm opacity-60'>{note.date}</span>
                         </div>
-                        <div>
+                        <div className='pb-8 md:pb-4'>
                           <button onClick={()=> setNoteEditing(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-accent'>Edit</button>
                           <button onClick={()=> deleteNotes(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-highlight'>Delete</button>
 
