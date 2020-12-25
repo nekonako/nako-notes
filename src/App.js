@@ -2,14 +2,23 @@ import './App.css';
 import * as React from 'react'
 
 const App = () => {
-  const [notes,setNotes] = React.useState([])
+
+  const json = localStorage.getItem('notes')
+  const savedNotes = JSON.parse(json)
+
+  const [notes,setNotes] = React.useState(savedNotes)
   const [noteEditing,setNoteEditing] = React.useState('')
 
   const addNote = (e) => {
     e.preventDefault();
+    const today = new Date()
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
     const newNote = {
       id : Math.random().toString(36).substr(2,9),
-      text: e.target.note.value
+      text: e.target.note.value,
+      date: dateTime
     }
     setNotes([...notes,newNote])
     e.target.note.value = ''
@@ -17,11 +26,16 @@ const App = () => {
 
   const editNote = (e, id) => {
     e.preventDefault();
+    const today = new Date()
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
     const updateNotes = notes.map((note)=> {
       if(note.id === id){
         return{
           id: note.id,
-          text: e.target.note.value
+          text: e.target.note.value,
+          date: dateTime
         }
       } else {
         return note
@@ -55,8 +69,8 @@ const App = () => {
         <div className='p-4 md:p-12 bg-secondary' style={{border: 'solid 2px'}}>
           <div className='pb-8 text-4xl font-bold text-center serif'>Nako Notes</div>
           <form onSubmit={addNote}>
-            <textarea type='text' name='note'  className='w-full p-3' resize='none'
-              style={{resize:'none', border: 'solid 2px #F3D2C1'}} />
+            <textarea type='text' name='note'  className='w-full p-2 pt-4' resize='none'
+              style={{resize:'none', border: 'solid 2px #F3D2C1'}}  rows='2' />
             <br/>
             <button className='px-4 py-1 mt-4 text-xl text-white bg-accent '
               style={{border: 'solid 2px'}}>Simpan</button>
@@ -78,9 +92,16 @@ const App = () => {
                             style={{border: 'solid 2px'}}>Simpan</button>
                         </form>
                       )}
-                      <div className='mt-3'>
-                        <button onClick={()=> setNoteEditing(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-accent'>Edit</button>
-                        <button onClick={()=> deleteNotes(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-highlight'>Delete</button>
+                      <div className='flex justify-between mt-3'>
+                        <div>
+                          <span className='text-sm opacity-60'>{note.date}</span>
+                        </div>
+                        <div>
+                          <button onClick={()=> setNoteEditing(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-accent'>Edit</button>
+                          <button onClick={()=> deleteNotes(note.id)} style={{border: 'solid 2px'}} className='px-3 mx-1 bg-highlight'>Delete</button>
+
+                        </div>
+
                       </div>
                     </div>
                   </div>
